@@ -19,11 +19,9 @@ app.get("/repositories/:id", (request, response) => {
 
   let repository = repositories.find(repository => repository.id === id)
 
-  if (!repository) {
-    return response.status(400).json({ error: 'Repository not found' })
-  }
-
-  return response.json(repository)
+  return repository
+    ? response.json(repository)
+    : response.status(404).json({ error: 'Repository not found' })
 });
 
 app.post("/repositories", (request, response) => {
